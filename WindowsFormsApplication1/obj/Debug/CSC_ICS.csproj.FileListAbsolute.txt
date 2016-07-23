@@ -47,3 +47,4 @@ C:\Users\coryc\Source\Repos\InvNew\WindowsFormsApplication1\obj\Debug\WindowsFor
 C:\Users\coryc\Source\Repos\InvNew\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\coryc\Source\Repos\InvNew\WindowsFormsApplication1\obj\Debug\CSC_ICS.csproj.GenerateResource.Cache
 C:\Users\coryc\Source\Repos\InvNew\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Migrations.Tweaks.resources
+C:\Users\Cory\Source\Repos\FBSInventoryApp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
