@@ -15,33 +15,26 @@ namespace WindowsFormsApplication1.EFModels
         public Part()
         {
             Transaction = new HashSet<Transaction>();
+            
         }
 
         [Key]
         public int QuickID { get; set; }
-
-        public int ScannedID { get; set; }
-
-        public int TransactionID { get; set; }
-
-        public int TechID { get; set; }
-
+        
         public string Category { get; set; }
 
-        public string PartNumber { get; set; }
+        public string PartNumber { get; set; }//
 
         public string Location { get; set; }
 
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; set; }//
 
-        public string Description { get; set; }
+        public string Description { get; set; }//
 
         public string Notes { get; set; }
 
         public string Quantity { get; set; }
-
-
-
+        
         public virtual ICollection<Transaction> Transaction { get; set; }
 
     }
@@ -51,6 +44,8 @@ namespace WindowsFormsApplication1.EFModels
         public PartConfiguration()
         {
             HasMany(e => e.Transaction);
+
+            
         }
     }
 }

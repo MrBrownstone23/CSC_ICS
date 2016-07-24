@@ -19,9 +19,7 @@ namespace WindowsFormsApplication1.EFModels
 
         [Key]
         public int TechID { get; set; }
-
-        public int TransactionID { get; set; }
-
+        
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

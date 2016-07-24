@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReturnPart));
             this.lblTakeInfo = new System.Windows.Forms.Label();
-            this.cboTechNameReturn = new System.Windows.Forms.ComboBox();
+            this.cboTechName = new System.Windows.Forms.ComboBox();
             this.lblConfirmInfo = new System.Windows.Forms.Label();
             this.btnCancelReturn = new System.Windows.Forms.Button();
             this.btnContinueReturn = new System.Windows.Forms.Button();
@@ -39,6 +39,8 @@
             this.tboDestinationReturn = new System.Windows.Forms.TextBox();
             this.cboReasonReturn = new System.Windows.Forms.ComboBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnAddquickID = new System.Windows.Forms.Button();
+            this.tboQuickID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -55,15 +57,15 @@
             this.lblTakeInfo.TabIndex = 8;
             this.lblTakeInfo.Text = "Scan your part(s) and verify the correct part(s) in the table below.";
             // 
-            // cboTechNameReturn
+            // cboTechName
             // 
-            this.cboTechNameReturn.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboTechNameReturn.FormattingEnabled = true;
-            this.cboTechNameReturn.Location = new System.Drawing.Point(328, 218);
-            this.cboTechNameReturn.Name = "cboTechNameReturn";
-            this.cboTechNameReturn.Size = new System.Drawing.Size(255, 24);
-            this.cboTechNameReturn.TabIndex = 13;
-            this.cboTechNameReturn.Text = "Select Your Name";
+            this.cboTechName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTechName.FormattingEnabled = true;
+            this.cboTechName.Location = new System.Drawing.Point(328, 218);
+            this.cboTechName.Name = "cboTechName";
+            this.cboTechName.Size = new System.Drawing.Size(255, 24);
+            this.cboTechName.TabIndex = 13;
+            this.cboTechName.Text = "Select Your Name";
             // 
             // lblConfirmInfo
             // 
@@ -146,16 +148,35 @@
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;
             // 
+            // btnAddquickID
+            // 
+            this.btnAddquickID.Location = new System.Drawing.Point(389, 582);
+            this.btnAddquickID.Name = "btnAddquickID";
+            this.btnAddquickID.Size = new System.Drawing.Size(75, 23);
+            this.btnAddquickID.TabIndex = 17;
+            this.btnAddquickID.Text = "button1";
+            this.btnAddquickID.UseVisualStyleBackColor = true;
+            this.btnAddquickID.Click += new System.EventHandler(this.btnAddquickID_Click);
+            // 
+            // tboQuickID
+            // 
+            this.tboQuickID.Location = new System.Drawing.Point(389, 556);
+            this.tboQuickID.Name = "tboQuickID";
+            this.tboQuickID.Size = new System.Drawing.Size(100, 20);
+            this.tboQuickID.TabIndex = 18;
+            // 
             // frmReturnPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(951, 617);
+            this.Controls.Add(this.tboQuickID);
+            this.Controls.Add(this.btnAddquickID);
             this.Controls.Add(this.tboDestinationReturn);
             this.Controls.Add(this.cboReasonReturn);
             this.Controls.Add(this.lblTakeInfo);
-            this.Controls.Add(this.cboTechNameReturn);
+            this.Controls.Add(this.cboTechName);
             this.Controls.Add(this.lblConfirmInfo);
             this.Controls.Add(this.btnCancelReturn);
             this.Controls.Add(this.btnContinueReturn);
@@ -176,7 +197,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblTakeInfo;
-        private System.Windows.Forms.ComboBox cboTechNameReturn;
+        private System.Windows.Forms.ComboBox cboTechName;
         private System.Windows.Forms.Label lblConfirmInfo;
         private System.Windows.Forms.Button btnCancelReturn;
         private System.Windows.Forms.Button btnContinueReturn;
@@ -185,5 +206,7 @@
         private System.Windows.Forms.TextBox tboDestinationReturn;
         private System.Windows.Forms.ComboBox cboReasonReturn;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btnAddquickID;
+        private System.Windows.Forms.TextBox tboQuickID;
     }
 }

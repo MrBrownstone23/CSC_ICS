@@ -3,7 +3,7 @@ namespace WindowsFormsApplication1.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class FInitialMigration : DbMigration
+    public partial class New : DbMigration
     {
         public override void Up()
         {
@@ -12,8 +12,6 @@ namespace WindowsFormsApplication1.Migrations
                 c => new
                     {
                         QuickID = c.Int(nullable: false, identity: true),
-                        TransactionID = c.Int(nullable: false),
-                        TechID = c.Int(nullable: false),
                         Category = c.String(),
                         PartNumber = c.String(),
                         Location = c.String(),
@@ -32,7 +30,6 @@ namespace WindowsFormsApplication1.Migrations
                         QuickID = c.Int(nullable: false),
                         TechID = c.Int(nullable: false),
                         TransactionType = c.Int(),
-                        PartNumber = c.String(),
                         Quantity = c.Int(nullable: false),
                         Destination = c.String(),
                         Reason = c.String(),
@@ -49,9 +46,9 @@ namespace WindowsFormsApplication1.Migrations
                 c => new
                     {
                         TechID = c.Int(nullable: false, identity: true),
-                        TransactionID = c.Int(nullable: false),
                         FirstName = c.String(),
                         LastName = c.String(),
+                        FullName = c.String(),
                     })
                 .PrimaryKey(t => t.TechID);
             

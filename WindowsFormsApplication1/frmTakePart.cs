@@ -20,8 +20,12 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
-            cboReasonTake.DataSource = Enum.GetValues(typeof(EnumReason));
+            cboReasonTake.GetReasonEnumCombobox();
+            cboTechName.GetTechCbo();
             
+            cboTechName.SelectedIndex = -1;
+            AllParts = new List<int>();
+
         }
 
         private void lblTakeInfo_Click(object sender, EventArgs e)
@@ -41,36 +45,54 @@ namespace WindowsFormsApplication1
 
         private void frmTakePart_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the '_WindowsFormsApplication1_DBContext_InventoryContextDataSet.Tech' table. You can move, or remove it, as needed.
-            this.techTableAdapter.Fill(this._WindowsFormsApplication1_DBContext_InventoryContextDataSet.Tech);
+            
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var quickID = int.Parse(textBox1.Text);
-            
-
-            using (var context = new InventoryContext())
+            try
             {
-                var part = context.Part.Where(x => x.QuickID == quickID).FirstOrDefault();
-                
-
-                PartList.Add(part);
-
-                var grid = PartList.Select(x => new
+                var quickID = int.Parse(textBox1.Text);
+                if (AllParts.Contains(quickID))
                 {
-                    QuickID = x.QuickID,
-                    PartNumber = x.PartNumber,
-                    SerialNumber = x.SerialNumber,
-                    Description = x.Description,
-                    Location = x.Location,
-                    Category = x.Category,
-                    Quantity = 1
-                }).ToList();
+                    throw new Exception();
+                }
+                AllParts.Add(quickID);
+                
+                using (var context = new InventoryContext())
+                {
+                    var part = context.Part.Where(x => x.QuickID == quickID).FirstOrDefault();
+                    if (part == null)
+                    {
+                        throw new ArgumentNullException();
+                    }
+                    PartList.Add(part);
 
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = grid;
+                    var grid = PartList.Select(x => new
+                    {
+                        QuickID = x.QuickID,
+                        PartNumber = x.PartNumber,
+                        SerialNumber = x.SerialNumber,
+                        Description = x.Description,
+                        Location = x.Location,
+                        Category = x.Category,
+                        Quantity = 1
+                    }).ToList();
+
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = grid;
+                }
+
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("That QuickID was not found." );
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"You cannot add the same QuickID twice \r\n \r\n {ex.Message}");
             }
         }
 
@@ -78,29 +100,49 @@ namespace WindowsFormsApplication1
 
         private void btnContinueTake_Click(object sender, EventArgs e)
         {
-            var partIDList = new List<int>();            
-            var techID = cboTechName.SelectedValue.ToString();
-            var reason = cboReasonTake.Text;
-            var destination = tboDestinationTake.Text;
-            string partsAddedList = "";
+            try
+            {
+                if (cboTechName.SelectedValue == null || cboReasonTake.Text == "" || tboDestinationTake.Text == "")
+                {
+                    throw new ArgumentNullException();
+                }
+
+                var partIDList = new List<int>();
+                var techID = Convert.ToInt32(cboTechName.SelectedValue);
+                var reason = cboReasonTake.Text;
+                var destination = tboDestinationTake.Text;
+                string partsAddedList = "";
+
+
+                foreach (DataGridViewRow Datarow in dataGridView1.Rows)
+                {
+                    var quickID = Datarow.Cells[0].Value.ToString();
+
+                    partIDList.Add((int)quickID.ToInt32());
+                }
+                var parts = new List<Part>();
+                using (var context = new InventoryContext())
+                {
+                    parts = context.Part.Where(x => partIDList.Contains(x.QuickID)).Select(x => x).ToList();
+
+                }
+
+                foreach (var part in parts)
+                {
+                    HelperMethods.TakePartToDB(part, techID, destination, reason);
+                }
+                dataGridView1.DataSource = null;
+
+
+                this.Close();
+            }
+            catch (ArgumentNullException ex)
+            {
+                MessageBox.Show($"You must select a Tech. \r\n {ex.Message}");
+            }
             
 
-            foreach (DataGridViewRow Datarow in dataGridView1.Rows)
-            {
-                var quickID = Datarow.Cells[0].Value.ToString();
-
-                partIDList.Add((int)quickID.ToInt32());
-            }
-
-            foreach (var partID in partIDList)
-            {
-                HelperMethods.RemovePartFromDB(partID, destination, reason, (int)techID.ToInt32());
-                partsAddedList += $"{partID}, ";
-            }
-            dataGridView1.DataSource = null;
-
             
-            this.Close();
 
 
         }
@@ -109,5 +151,7 @@ namespace WindowsFormsApplication1
         {
             this.Close();
         }
+
+        public List<int> AllParts { get; set; }
     }
 }
