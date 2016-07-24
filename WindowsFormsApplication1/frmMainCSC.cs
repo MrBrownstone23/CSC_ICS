@@ -39,6 +39,14 @@ namespace WindowsFormsApplication1
             frmTakePart.Show();
 
         }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            var frmReturnPart = new frmReturnPart();
+
+            frmReturnPart.Show();
+
+        }
     }
     }
 

@@ -63,6 +63,7 @@
             this.btnReturn.TabIndex = 1;
             this.btnReturn.Text = "Return to Inventory";
             this.btnReturn.UseVisualStyleBackColor = false;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // pictureBox1
             // 

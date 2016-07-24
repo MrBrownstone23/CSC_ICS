@@ -33,7 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +55,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToDB\AddPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddToDB\AddPart.Designer.cs">
+      <DependentUpon>AddPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddToDB\AddTech.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddToDB\AddTech.Designer.cs">
+      <DependentUpon>AddTech.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\InventoryContext.cs" />
+    <Compile Include="EFModels\Part.cs" />
+    <Compile Include="EFModels\Tech.cs" />
+    <Compile Include="EFModels\Transaction.cs" />
+    <Compile Include="EntityViewModel.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="frmMainCSC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,14 +92,37 @@
     <Compile Include="formViewDB.Designer.cs">
       <DependentUpon>formViewDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmReturnPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReturnPart.Designer.cs">
+      <DependentUpon>frmReturnPart.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTakePart.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmTakePart.Designer.cs">
       <DependentUpon>frmTakePart.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperMethods.cs" />
+    <Compile Include="Migrations\201607241845462_New.cs" />
+    <Compile Include="Migrations\201607241845462_New.Designer.cs">
+      <DependentUpon>201607241845462_New.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_WindowsFormsApplication1_DBContext_InventoryContextDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_WindowsFormsApplication1_DBContext_InventoryContextDataSet.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddToDB\AddPart.resx">
+      <DependentUpon>AddPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddToDB\AddTech.resx">
+      <DependentUpon>AddTech.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMainCSC.resx">
       <DependentUpon>frmMainCSC.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,8 +132,14 @@
     <EmbeddedResource Include="formViewDB.resx">
       <DependentUpon>formViewDB.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmReturnPart.resx">
+      <DependentUpon>frmReturnPart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTakePart.resx">
       <DependentUpon>frmTakePart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607241845462_New.resx">
+      <DependentUpon>201607241845462_New.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -93,6 +150,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,10 +160,27 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="_WindowsFormsApplication1_DBContext_InventoryContextDataSet.xsc">
+      <DependentUpon>_WindowsFormsApplication1_DBContext_InventoryContextDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_WindowsFormsApplication1_DBContext_InventoryContextDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_WindowsFormsApplication1_DBContext_InventoryContextDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_WindowsFormsApplication1_DBContext_InventoryContextDataSet.xss">
+      <DependentUpon>_WindowsFormsApplication1_DBContext_InventoryContextDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\dolly.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\shelf2.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
